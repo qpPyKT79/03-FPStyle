@@ -23,14 +23,14 @@ namespace CloudMaker
         {
             var argumentsParser = new FluentCommandLineParser<CommandLineArguments>();
             argumentsParser.Setup(a => a.InputType)
-                .As('t', "InputType")
+                .As('i', "InputType")
                 .Required();
 
             argumentsParser.Setup(a => a.UIType)
                 .As('u', "UIType")
                 .Required();
             argumentsParser.Setup(a => a.ImageFormat)
-                .As('i', "ImageFormat")
+                .As('f', "ImageFormat")
                 .Required();
 
             argumentsParser.SetupHelp("?", "h", "help")
@@ -40,22 +40,30 @@ namespace CloudMaker
 
             if (parsingResult.HasErrors)
             {
-                //argumentsParser.HelpOption.ShowHelp(argumentsParser.Options);
-                parsedArguments = new CommandLineArguments()
-                {
-                    ReaderFunc = Provider.FileReader["file"],
-                    UI = Provider.UiType["CUI"],
-                    WriterFunc = Provider.WriterType["png"]
-                };
+                parsedArguments = DefaultSettings();
                 return false;
             }
 
             parsedArguments = argumentsParser.Object;
-            parsedArguments.ReaderFunc = Provider.FileReader[parsedArguments.InputType];
-            parsedArguments.UI = Provider.UiType[parsedArguments.UIType];
-            parsedArguments.WriterFunc = Provider.WriterType[parsedArguments.ImageFormat];
-
+            try
+            {
+                parsedArguments.ReaderFunc = Provider.FileReader[parsedArguments.InputType];
+                parsedArguments.UI = Provider.UiType[parsedArguments.UIType];
+                parsedArguments.WriterFunc = Provider.WriterType[parsedArguments.ImageFormat];
+            }
+            catch (KeyNotFoundException msg)
+            {
+                parsedArguments = DefaultSettings();
+            }
             return !parsingResult.HasErrors;
         }
+
+        private static CommandLineArguments DefaultSettings()
+            => new CommandLineArguments()
+            {
+                ReaderFunc = Provider.FileReader["file"],
+                UI = Provider.UiType["CUI"],
+                WriterFunc = Provider.WriterType["png"]
+            };
     }
 }

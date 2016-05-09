@@ -23,7 +23,7 @@ namespace CloudMaker.Writers
                 foreach (var tag in tags)
                     g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency),
                         new SolidBrush(GetRandomColor(random, colors)), tag.X, tag.Y);
-                image.Save(outputSourceName, format);
+                image.Save(outputSourceName+format.ToString(), format);
             }
         }
 
