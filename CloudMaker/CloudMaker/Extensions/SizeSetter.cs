@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CloudMaker.Extensions
 {
@@ -13,13 +10,12 @@ namespace CloudMaker.Extensions
         {
             if (tags.Count == 0)
                 return tags;
-            int maxFreq = (int)tags.Max(tag => tag.Frequency);
-            int minFreq = (int)tags.Min(tag => tag.Frequency);
+            var maxFreq = (int)tags.Max(tag => tag.Frequency);
+            var minFreq = (int)tags.Min(tag => tag.Frequency);
             var newTags = new List<CloudTag>();
             using (Image tempImage = new Bitmap(1, 1))
             using (var g = Graphics.FromImage(tempImage))
-                foreach (var tag in tags)
-                    newTags.Add(SetSize(tag, g, minSize, maxSize, minFreq, maxFreq));
+                newTags.AddRange(tags.Select(tag => SetSize(tag, g, minSize, maxSize, minFreq, maxFreq)));
             return newTags;
         }
 

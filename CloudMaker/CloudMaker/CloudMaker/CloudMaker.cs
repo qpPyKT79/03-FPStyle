@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CloudMaker.Extensions;
-using CUI;
 using Microsoft.Xna.Framework;
 using Nuclex.Game.Packing;
 
@@ -10,7 +9,8 @@ namespace CloudMaker.CloudMaker
 {
     public class CloudMaker
     {
-        public List<CloudTag> CreateCloud(List<string> inputWords, int minFontSize, int maxFontSize, Func<int, int, RectanglePacker> packer )
+        public List<CloudTag> CreateCloud(List<string> inputWords, int minFontSize, int maxFontSize,
+            Func<int, int, RectanglePacker> packer)
             =>
                 SetLocatons(inputWords.SetFrequences().SetSize(minFontSize, maxFontSize), packer);
 
@@ -26,8 +26,7 @@ namespace CloudMaker.CloudMaker
             }).ToList();
         }
 
-
-        public float getMaxWidth(List<CloudTag> tags) => (float)Math.Log(tags.Count, 2) * tags.Max(tag => tag.TagSize.Width);
+        private float getMaxWidth(List<CloudTag> tags)
+            => (float) Math.Log(tags.Count, 2)*tags.Max(tag => tag.TagSize.Width);
     }
-
 }

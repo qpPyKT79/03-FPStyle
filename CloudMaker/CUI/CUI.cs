@@ -44,10 +44,7 @@ namespace CUI
             return new List<string>();
         }
 
-        private void ErrorMsg(string errMsg)
-        {
-            Console.WriteLine(errMsg);
-        }
+        private void ErrorMsg(string errMsg) => Console.WriteLine(errMsg);
 
         private string GetName()
         {
@@ -79,12 +76,12 @@ namespace CUI
             return minSize >= 5 && maxSize <= 25 && minSize != maxSize ? new Tuple<int, int>(minSize, maxSize) : GetSize();
         }
 
-        private Color[] GetColors()
+        private IEnumerable<Color> GetColors()
         {
             Console.WriteLine();
             Console.WriteLine("Write colors separated with whitespase (if u dont want to set up colors, just set an empty string)");
             var stringColors = Console.ReadLine();
-            return string.IsNullOrWhiteSpace(stringColors) ? null : stringColors.Split(' ').Select(Color.FromName).ToArray();
+            return string.IsNullOrWhiteSpace(stringColors) ? null : stringColors.Split(' ').Select(Color.FromName);
         }
 
         public UiSettings GetSettings() => new UiSettings(GetName(), GetFilters(), GetCloudMakerAlg(), GetSize(), GetColors());

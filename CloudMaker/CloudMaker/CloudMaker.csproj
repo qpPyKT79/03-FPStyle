@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Bounds.cs" />
     <Compile Include="CloudMaker\CloudMaker.cs" />
-    <Compile Include="CloudMaker\CloudMakerOptions.cs" />
     <Compile Include="CloudTag.cs" />
     <Compile Include="CommandLineArguments.cs" />
     <Compile Include="Extensions\BoundsGetter.cs" />

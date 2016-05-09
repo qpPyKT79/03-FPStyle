@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CloudMaker.Extensions
 {
     public static class BoundsGetter
     {
-        public static Bounds GetBounds(this List<CloudTag> tags)
+        public static Bounds GetBounds(this IEnumerable<CloudTag> tags)
         {
             var width = 0f;
             var height = 0f;
