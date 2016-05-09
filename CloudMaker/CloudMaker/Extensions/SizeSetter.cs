@@ -21,7 +21,9 @@ namespace CloudMaker.Extensions
 
         private static CloudTag SetSize(CloudTag tag, Graphics img, int minSize, int maxSize, int minFreq, int maxFreq)
         {
-            var size = tag.Frequency > minFreq ? (maxSize * (tag.Frequency - minFreq)) / (maxFreq - minFreq) + minSize : minSize;
+            var size = tag.Frequency > minFreq
+                ? (maxSize*(tag.Frequency - minFreq))/(maxFreq - minFreq) + minSize
+                : minSize;
             size *= 10;
             return tag.SetSize(img.MeasureString(tag.Word,
                 new Font("Times New Roman", size))).SetFrequency(size);

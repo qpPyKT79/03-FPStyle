@@ -76,12 +76,12 @@ namespace CUI
             return minSize >= 5 && maxSize <= 25 && minSize != maxSize ? new Tuple<int, int>(minSize, maxSize) : GetSize();
         }
 
-        private IEnumerable<Color> GetColors()
+        private Color[] GetColors()
         {
             Console.WriteLine();
             Console.WriteLine("Write colors separated with whitespase (if u dont want to set up colors, just set an empty string)");
             var stringColors = Console.ReadLine();
-            return string.IsNullOrWhiteSpace(stringColors) ? null : stringColors.Split(' ').Select(Color.FromName);
+            return string.IsNullOrWhiteSpace(stringColors) ? null : stringColors.Split(' ').Select(Color.FromName).ToArray();
         }
 
         public UiSettings GetSettings() => new UiSettings(GetName(), GetFilters(), GetCloudMakerAlg(), GetSize(), GetColors());

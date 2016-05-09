@@ -14,7 +14,7 @@ namespace CloudMaker
 
         public Func<string, List<string>> ReaderFunc { get; private set; }
         public Func<UiSettings> Ui { get; private set; }
-        public Action<List<CloudTag>, IEnumerable<Color>> WriterFunc { get; private set; }
+        public Action<List<CloudTag>, Color[]> WriterFunc { get; private set; }
 
         public static bool TryGetArguments(string[] args, out CommandLineArguments parsedArguments)
         {

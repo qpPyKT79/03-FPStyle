@@ -5,7 +5,7 @@ namespace CloudMaker.Extensions
 {
     public static class FrequenciesSetter
     {
-        public static List<CloudTag> SetFrequences(this List<string> source) => source.GroupBy(word => word)
+        public static List<CloudTag> SetFrequences(this IEnumerable<string> source) => source.GroupBy(word => word)
             .OrderByDescending(word => word.Count())
             .Select(words => new CloudTag(words.First()).SetFrequency(words.Count())).Take(100).ToList();
     }

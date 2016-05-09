@@ -22,8 +22,8 @@ namespace CloudMaker
             {"CUI", () => new CUI.CUI(FilterTypes.Keys.ToList(),Packers.Keys.ToList()).GetSettings()}
         };
 
-        public static readonly Dictionary<string, Action<List<CloudTag>, IEnumerable<Color>>> WriterType = new Dictionary
-            <string, Action<List<CloudTag>, IEnumerable<Color>>>
+        public static readonly Dictionary<string, Action<List<CloudTag>, Color[]>> WriterType = new Dictionary
+            <string, Action<List<CloudTag>, Color[]>>
         {
             {"png", (tags, colors) => new ImageWriter().WriteTo(tags, colors, System.Drawing.Imaging.ImageFormat.Png)},
             {"jpeg", (tags, colors) => new ImageWriter().WriteTo(tags, colors, System.Drawing.Imaging.ImageFormat.Jpeg)}

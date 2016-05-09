@@ -10,13 +10,13 @@ namespace CUI
     public class UiSettings
     {
         public string Filename { get; }
-        public IEnumerable<Color> Colors { get; }
+        public Color[] Colors { get; }
         public List<string> Filters { get; }
         public string PackerAlg { get; }
         public int MinFontSize { get; }
         public int MaxFontSize { get; }
 
-        public UiSettings(string filename, List<string> filters, string alg, Tuple<int,int> fontSize, IEnumerable<Color> colors)
+        public UiSettings(string filename, List<string> filters, string alg, Tuple<int,int> fontSize, Color[] colors)
         {
             Filename = filename;
             Filters = filters;

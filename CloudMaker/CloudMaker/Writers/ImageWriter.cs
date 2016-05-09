@@ -9,7 +9,7 @@ namespace CloudMaker.Writers
 {
     public class ImageWriter
     {
-        public void WriteTo(List<CloudTag> tags, IEnumerable<Color> colors, ImageFormat format)
+        public void WriteTo(List<CloudTag> tags, Color[] colors, ImageFormat format)
         {
             const string outputSourceName = "out";
             var bounds = tags.GetBounds();
@@ -19,8 +19,8 @@ namespace CloudMaker.Writers
             {
                 foreach (var tag in tags)
                     g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency),
-                        new SolidBrush(GetRandomColor(random, colors.ToArray())), tag.X, tag.Y);
-                image.Save($"{outputSourceName}.{format}", format);
+                        new SolidBrush(GetRandomColor(random, colors)), tag.X, tag.Y);
+                image.Save($"{outputSourceName}.{format.ToString().ToLower()}", format);
             }
         }
 
