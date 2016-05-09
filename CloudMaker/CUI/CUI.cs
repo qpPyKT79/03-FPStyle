@@ -2,38 +2,42 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CUI;
 
-namespace UI
+namespace CUI
 {
     public class CUI
     {
-        private static readonly HashSet<string> Algs =new HashSet<string> { "arevalo", "simple" };
-        private static readonly HashSet<string> Filters = new HashSet<string> { "Normalizer", "BoringWords" };
-        public string GetCloudMakerAlg()
+        private List<string> Algs { get;}
+        private List<string> Filters { get; }
+
+        public CUI(List<string> filterNames, List<string> algNames)
+        {
+            Algs = algNames;
+            Filters = filterNames;
+        }
+
+        private string GetCloudMakerAlg()
         {
             Console.WriteLine();
             Console.WriteLine("Set algorithm of making cloud, members are:");
             Console.WriteLine(string.Join(" ", Algs));
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var cloudMakerAlg = Console.ReadLine();
-            if (Algs.Contains(cloudMakerAlg))
+            if (Algs.Contains(cloudMakerAlg) || cloudMakerAlg == "")
                 return cloudMakerAlg;
             else
                 ErrorMsg("Errors in input, simple alg were choosen");
             return "simple";
         }
 
-        public List<string> GetFilters()
+        private List<string> GetFilters()
         {
             Console.WriteLine();
             Console.WriteLine("Choose filters (u can choose many of them, separate filters with space), members are:");
             Console.WriteLine(string.Join(" ", Filters));
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var input = Console.ReadLine().Split(' ').ToList();
-            if (input.Select(f => Filters.Contains(f)).All(x => x))
+            if (input.Select(f => Filters.Contains(f)).All(x => x) || input.Count == 0)
                 return input;
             else
                 ErrorMsg("Errors in input, no filters were choosen");
@@ -45,13 +49,13 @@ namespace UI
             Console.WriteLine(errMsg);
         }
 
-        public string GetName()
+        private string GetName()
         {
             Console.WriteLine("Plese type Filename");
             return Console.ReadLine();
         }
 
-        public Tuple<int, int> GetSize()
+        private Tuple<int, int> GetSize()
         {
             var minSize = 5;
             var maxSize = 25;
@@ -75,7 +79,7 @@ namespace UI
             return minSize >= 5 && maxSize <= 25 && minSize != maxSize ? new Tuple<int, int>(minSize, maxSize) : GetSize();
         }
 
-        public Color[] GetColors()
+        private Color[] GetColors()
         {
             Console.WriteLine();
             Console.WriteLine("Write colors separated with whitespase (if u dont want to set up colors, just set an empty string)");

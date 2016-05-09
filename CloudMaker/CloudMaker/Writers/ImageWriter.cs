@@ -17,7 +17,7 @@ namespace CloudMaker.Writers
             string outputSourceName = "out";
             var bounds = tags.GetBounds();
             var random = new Random();
-            using (var image = new Bitmap((int)bounds.Item1 + 1, (int)bounds.Item2 + 1))
+            using (var image = new Bitmap((int)bounds.Width + 1, (int)bounds.Height + 1))
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)

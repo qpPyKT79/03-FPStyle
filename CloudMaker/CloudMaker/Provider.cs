@@ -10,7 +10,6 @@ using CloudMaker.Readers;
 using CloudMaker.Writers;
 using CUI;
 using Nuclex.Game.Packing;
-using UI;
 
 namespace CloudMaker
 {
@@ -23,7 +22,7 @@ namespace CloudMaker
         };
         public static readonly Dictionary<string, Func<UiSettings>> UiType = new Dictionary<string, Func<UiSettings>>
         {
-            {"CUI", () => new UI.CUI().GetSettings()}
+            {"CUI", () => new CUI.CUI(FilterTypes.Keys.ToList(),Packers.Keys.ToList()).GetSettings()}
         };
 
         public static readonly Dictionary<string, Action<List<CloudTag>, Color[]>> WriterType = new Dictionary
